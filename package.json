@@ -18,5 +18,8 @@
   "bugs": {
     "url": "https://github.com/Dar1anMar1us/OrangeHRM-Automation-Practice/issues"
   },
-  "homepage": "https://github.com/Dar1anMar1us/OrangeHRM-Automation-Practice#readme"
+  "homepage": "https://github.com/Dar1anMar1us/OrangeHRM-Automation-Practice#readme",
+  "devDependencies": {
+    "cypress": "^15.15.0"
+  }
 }
