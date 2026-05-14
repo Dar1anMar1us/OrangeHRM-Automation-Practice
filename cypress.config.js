@@ -1,7 +1,7 @@
 const { defineConfig } = require("cypress");
 
 module.exports = defineConfig({
-  allowCypressEnv: false,
+  allowCypressEnv: true,
   viewportHeight: 860,
   screenshotOnRunFailure: true,
   screenshotQuality: 20, // lower quality, smaller files
@@ -18,6 +18,7 @@ module.exports = defineConfig({
   },
 
   e2e: {
+    baseUrl: 'https://opensource-demo.orangehrmlive.com/web/index.php',
     setupNodeEvents(on, config) {
       // implement node event listeners here
     },

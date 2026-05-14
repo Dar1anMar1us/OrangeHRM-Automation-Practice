@@ -22,4 +22,17 @@
 //
 //
 // -- This will overwrite an existing command --
+
+import { loginModule } from "../e2e/modules/login"
+
 // Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
+Cypress.Commands.add('login', (username, password) => {
+    const user = username || Cypress.env('username')
+    const pass = password || Cypress.env('password')
+    cy.session([user, pass], () => {
+        loginModule.visit().login(user, pass)
+
+        // Verify successful login
+        cy.url().should('include', '/dashboard/index')
+    })
+})
