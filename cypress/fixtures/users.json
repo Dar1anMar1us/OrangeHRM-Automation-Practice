@@ -1,0 +1,22 @@
+{
+  "newCandidate": {
+    "fullName": "John Michael Doe",
+    "email": "johndoe@example.com",
+    "title": "Mr",
+    "birth_date": "10",
+    "birth_month": "05",
+    "birth_year": "1990",
+    "firstName": "John",
+    "middleName": "Michael",
+    "lastName": "Doe",
+    "vacancy": "Software Engineer",
+    "company": "Acme Inc.",
+    "address1": "123 Main St",
+    "address2": "Apt 4B",
+    "country": "United States",
+    "zipcode": "12345",
+    "state": "California",
+    "city": "Los Angeles",
+    "contactNumber": "1234567890"
+  }
+}
