@@ -18,6 +18,8 @@ jobs:
     - run: npm ci
     - name: Running tests on Chrome
       run: npx cypress run --browser chrome
+    - name: Generate PDF report from HTML
+      run: npm run report:pdf
     - name: Upload HTML Report as Artifact
       uses: actions/upload-artifact@v7
       with:
@@ -38,8 +40,8 @@ jobs:
     - name: Running tests on Edge
       run: npx cypress run --browser edge
 
-  firefox-execution:
-    name: Execute tests Firefox
+  electron-execution:
+    name: Execute tests Electron
     runs-on: ubuntu-latest
     needs: edge-execution
     steps:
@@ -48,5 +50,5 @@ jobs:
       with:
         node-version: 24
     - run: npm ci
-    - name: Running tests on Chrome
-      run: npx cypress run --browser firefox
+    - name: Running tests on Electron
+      run: npx cypress run --browser electron
