@@ -4,7 +4,7 @@ const fs = require('fs')
 
 async function generatePDFReport() {
     const htmlReportPath = path.resolve(__dirname, '../cypress/reports/mochawesome/index.html')
-    const pdfReportPath = path.resolve(__dirname, '../cypress/reports/mochawesome/cypress-test-report.pdf')
+    const pdfReportPath = path.resolve(__dirname, '../cypress/reports/mochawesome/orangehrmlive-test-report.pdf')
 
     if (!fs.existsSync(htmlReportPath)) {
         console.error('❌ HTML report not found!')
@@ -21,8 +21,6 @@ async function generatePDFReport() {
     const page = await browser.newPage()
 
     await page.goto(`file://${htmlReportPath}`, { waitUntil: 'networkidle0' })
-
-    await page.waitForTimeout(1500)
 
     await page.pdf({
         path: pdfReportPath,

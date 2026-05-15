@@ -9,24 +9,24 @@ describe('Recruitment API - Resume Upload Security Tests', () => {
         cy.login()
     })
 
-    // it('should reject dangerous file extensions (client validation)', () => {
-    //     const dangerousFiles = [
-    //         'cypress/fixtures/upload/malicious.php',
-    //         'cypress/fixtures/upload/malicious.sh',
-    //         // 'cypress/fixtures/upload/magicbytes.php.pdf',
-    //         'cypress/fixtures/upload/shell.php5'
-    //     ]
+    it('should reject dangerous file extensions (client validation)', () => {
+        const dangerousFiles = [
+            'cypress/fixtures/upload/malicious.php',
+            'cypress/fixtures/upload/malicious.sh',
+            // 'cypress/fixtures/upload/magicbytes.php.pdf',
+            'cypress/fixtures/upload/shell.php5'
+        ]
 
-    //     dangerousFiles.forEach((file) => {
-    //         cy.visit('/recruitment/viewCandidates')
-    //         cy.get(recruitmentLocators.saveButton).contains('Add').click()
+        dangerousFiles.forEach((file) => {
+            cy.visit('/recruitment/viewCandidates')
+            cy.get(recruitmentLocators.saveButton).contains('Add').click()
 
-    //         cy.get(recruitmentLocators.simpleButton).click()
-    //         cy.get(recruitmentLocators.fileUpload).selectFile(file, { force: true })
+            cy.get(recruitmentLocators.simpleButton).click()
+            cy.get(recruitmentLocators.fileUpload).selectFile(file, { force: true })
 
-    //         recruitmentModule.verifyUploadError()
-    //     })
-    // })
+            recruitmentModule.verifyUploadError()
+        })
+    })
 
     it('should create candidate and reject dangerous file types (server validation)', () => {
         const maliciousFiles = [
