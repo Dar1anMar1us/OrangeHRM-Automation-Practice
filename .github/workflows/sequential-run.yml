@@ -1,0 +1,52 @@
+name: Run tests Sequentially
+on:
+  workflow_dispatch:
+
+env:
+  CYPRESS_USERNAME: ${{ secrets.CYPRESS_USERNAME }}
+  CYPRESS_PASSWORD: ${{ secrets.CYPRESS_PASSWORD }}
+
+jobs:
+  chrome-execution:
+    name: Execute tests Chrome
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v6
+    - uses: actions/setup-node@v6
+      with:
+        node-version: 24
+    - run: npm ci
+    - name: Running tests on Chrome
+      run: npx cypress run --browser chrome
+    - name: Upload HTML Report as Artifact
+      uses: actions/upload-artifact@v7
+      with:
+        name: cypress-test-report
+        path: cypress/reports/mochawesome/orangehrmlive-test-report.pdf
+        retention-days: 30
+
+  edge-execution:
+    name: Execute tests Edge
+    runs-on: windows-latest
+    needs: chrome-execution
+    steps:
+    - uses: actions/checkout@v6
+    - uses: actions/setup-node@v6
+      with:
+        node-version: 24
+    - run: npm ci
+    - name: Running tests on Edge
+      run: npx cypress run --browser edge
+
+  firefox-execution:
+    name: Execute tests Firefox
+    runs-on: ubuntu-latest
+    needs: edge-execution
+    steps:
+    - uses: actions/checkout@v6
+    - uses: actions/setup-node@v6
+      with:
+        node-version: 24
+    - run: npm ci
+    - name: Running tests on Chrome
+      run: npx cypress run --browser firefox
