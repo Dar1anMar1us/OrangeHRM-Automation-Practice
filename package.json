@@ -7,7 +7,7 @@
     "cypress:open": "env-cmd --silent cypress open",
     "test": "env-cmd --silent cypress run -b electron --headless && npm run report:pdf",
     "report:merge": "mochawesome-merge cypress/reports/mochawesome/*.json > cypress/reports/mochawesome-report.json",
-    "report:pdf": "node scripts/generate-pdf-report.js"
+    "report:pdf": "node scripts/generate-pdf-report.js && rm cypress/reports/mochawesome/index.html"
   },
   "repository": {
     "type": "git",
