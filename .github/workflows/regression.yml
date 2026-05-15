@@ -42,6 +42,6 @@ jobs:
         with:
           name: regression-report-${{ github.run_number }}
           path: |
-            cypress/reports/mochawesome/report.html
-            cypress/reports/mochawesome/cypress-test-report.pdf
+            cypress/reports/mochawesome/index.html
+            cypress/reports/mochawesome/orangehrmlive-test-report.pdf
           retention-days: 30
