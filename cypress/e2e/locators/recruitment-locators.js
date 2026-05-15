@@ -21,6 +21,8 @@ export const recruitmentLocators = {
     errorMessage: '.oxd-input-group > .oxd-text',
     // Candidate list
     candidateRecord: '.oxd-table-row',
+    dialogContainer: '.oxd-sheet',
+    deleteButton: '.oxd-button--label-danger',
     // Search hints
     searchHints: 'input[placeholder="Type for hints..."]'
 }

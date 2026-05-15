@@ -19,8 +19,19 @@ module.exports = defineConfig({
 
   e2e: {
     baseUrl: 'https://opensource-demo.orangehrmlive.com/web/index.php',
+    reporter: 'cypress-mochawesome-reporter',
+    reporterOptions: {
+      reportDir: 'cypress/reports/mochawesome',
+      overwrite: true,
+      html: true,
+      json: true,
+      charts: true,
+      embeddedScreenshots: true,
+      inlineAssets: true,
+    },
     setupNodeEvents(on, config) {
-      // implement node event listeners here
+      require('cypress-mochawesome-reporter/plugin')(on)
+      return config
     },
   },
 });

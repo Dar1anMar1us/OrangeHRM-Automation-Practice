@@ -17,14 +17,24 @@ describe('Recruitment Module - Candidates', () => {
     it('should add a new candidate successfully', () => {
         Object.assign(candidateData, { email: `john.doe${Date.now()}@example.com` })
         recruitmentModule.addCandidate(candidateData)
+        Cypress.env('lastCreatedCandidate', candidateData.fullName)
         recruitmentModule.verifyCandidateExists(`${candidateData.firstName} ${candidateData.middleName} ${candidateData.lastName}`)
     })
 
     it('should allow valid PDF resume', () => {
         Object.assign(candidateData, { email: `john.doe${Date.now()}@example.com` })
         recruitmentModule.addCandidate(candidateData, false)
+        Cypress.env('lastCreatedCandidate', candidateData.fullName)
         recruitmentModule.uploadResume('cypress/fixtures/upload/resume-valid.pdf')
         cy.get(recruitmentLocators.saveButton).click()
         recruitmentModule.verifyUploadSuccess()
+    })
+
+    afterEach(() => {
+        const fullName = Cypress.env('lastCreatedCandidate')
+        if (fullName) {
+            recruitmentModule.deleteCandidate(fullName)
+            Cypress.env('lastCreatedCandidate', null)
+        }
     })
 })

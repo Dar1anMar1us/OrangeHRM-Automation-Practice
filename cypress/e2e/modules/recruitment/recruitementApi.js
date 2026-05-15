@@ -27,7 +27,7 @@ export const recruitmentApi = {
             url: '/api/v2/recruitment/candidate/attachments',
             failOnStatusCode: false, // necessary here
             headers: {
-                'Content-Type': 'application/pdf',
+                'Content-Type': 'application/json'
             },
             body: {
                 candidateId: candidateId,

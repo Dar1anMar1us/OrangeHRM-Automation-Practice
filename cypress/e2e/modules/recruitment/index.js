@@ -32,7 +32,7 @@ export const recruitmentModule = {
 
         save && cy.get(recruitmentLocators.saveButton).click()
             .then(() => cy.get(recruitmentLocators.successToast).should('contain', 'Successfully Saved'))
-        
+
         return this
     },
 
@@ -40,6 +40,21 @@ export const recruitmentModule = {
         cy.visit('/recruitment/viewCandidates')
         cy.get(recruitmentLocators.searchHints).first().type(fullName)
         cy.get('button.oxd-button').contains('Search').click()
+        return this
+    },
+
+    deleteCandidate(fullName) {
+        this.searchCandidate(fullName)
+
+        cy.contains(recruitmentLocators.candidateRecord, fullName)
+            .find('input[type="checkbox"]')
+            .check({ force: true })
+
+        cy.get('button.oxd-button').contains('Delete').click()
+        cy.get(recruitmentLocators.dialogContainer).should('be.visible')
+        cy.get(recruitmentLocators.deleteButton).contains('Yes, Delete').click()
+        cy.get(recruitmentLocators.successToast).should('contain', 'Successfully Deleted')
+        cy.log(`✅ Candidate "${fullName}" deleted successfully`)
         return this
     },
 
