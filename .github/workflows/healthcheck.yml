@@ -1,0 +1,33 @@
+name: OrangeHRM Health Check
+
+on:
+  schedule:
+    - cron: '0 */3 * * *'        # Every 3 hours
+  workflow_dispatch:             # Allows manual trigger
+
+jobs:
+  healthcheck:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'npm'
+
+      - name: Install Dependencies
+        run: npm ci
+
+      - name: Run Login and Dashboard Health Check
+        uses: cypress-io/github-action@v6
+        with:
+          browser: chrome
+          spec: cypress/e2e/1-dashboard/dashboard.cy.js
+          record: false
+        env:
+          CYPRESS_USERNAME: ${{ secrets.CYPRESS_USERNAME }}
+          CYPRESS_PASSWORD: ${{ secrets.CYPRESS_PASSWORD }}

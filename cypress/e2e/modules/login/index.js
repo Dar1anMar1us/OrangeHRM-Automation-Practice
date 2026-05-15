@@ -7,8 +7,8 @@ export const loginModule = {
     },
 
     login(username, password) {
-        const user = username || Cypress.env('username')
-        const pass = password || Cypress.env('password')
+        const user = username || Cypress.env('USERNAME')
+        const pass = password || Cypress.env('PASSWORD')
         cy.get(loginLocators.username).clear().type(user)
         cy.get(loginLocators.password).clear().type(pass)
         cy.get(loginLocators.submit).click()
