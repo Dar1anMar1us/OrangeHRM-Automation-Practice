@@ -33,6 +33,7 @@ export const recruitmentApi = {
                 candidateId: candidateId,
                 attachment: {
                     name: fileName,
+                    type: 'application/pdf',
                     size: Math.floor(base64Content.length * 0.75), // rough size
                     base64: base64Content
                 }
